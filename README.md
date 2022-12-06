@@ -1,6 +1,6 @@
 Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction
 ---------------------------------------------------------------------
-[Paper]() | [Project Page](https://dmklee.github.io/image2sphere/)
+[Paper](https://github.com/dmklee/image2sphere/blob/gh-pages/assets/paper.pdf) | [Project Page](https://dmklee.github.io/image2sphere/)
 
 ---------------------------------------------------------------------
 
