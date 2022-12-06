@@ -89,7 +89,7 @@ make_header('Paper')
 body.append('div').style('line-height', 1.4).style('font-weight', 'bold').style('font-size', '0.9rem').text(title)
 	.append('div').style('font-weight', 'normal').text(authors.map(d => ' '+d.name))
 	.append('div').style('font-style', 'italic').text("Preprint")
-//	.append('div').style('font-style', 'normal').append('a').attr('href', '').text('[Arxiv]')
+	.append('div').style('font-style', 'normal').append('a').attr('href', 'assets/paper.pdf').text('[PDF]')
 	
 
 make_header('Code')
