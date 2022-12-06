@@ -40,3 +40,6 @@ train on SYMSOL II objects (`--dataset_name=symsolII-50000` will train on sphX; 
 python -m src.train --dataset_name=pascal3d-warp-synth --encoder=resnet101_pretrained --seed=0
 ```
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
+
+## Acknowledgements
+The code for loading and warping PASCAL3D+ images is taken from [this repo](https://github.com/Davmo049/Public_prob_orientation_estimation_with_matrix_fisher_distributions).  The code for generating healpy grids and visualizing distributions over SO(3) is taken from [this repo](https://github.com/google-research/google-research/tree/master/implicit_pdf).
