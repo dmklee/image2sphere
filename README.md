@@ -27,7 +27,7 @@ python -m src.train --dataset_name=modelnet10-limited --encoder=resnet50_pretrai
 ```
 
 ## Train on SYMSOL
-Here is an example for training on SYMSOL I with 50k views per instance
+Here is an example for training on SYMSOL I with 50k views per instance 
 ```
 python -m src.train --dataset_name=symsolI-50000 --encoder=resnet50_pretrained --seed=0
 ```
