@@ -25,6 +25,7 @@ function make_header(name) {
 		.style('font-style', 'italic')
 		.style('margin', '2px 4px')
 		.text(name)
+	
 }
 
 const max_width = '800px';
