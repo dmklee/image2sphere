@@ -87,11 +87,16 @@ body.append('div')
 	.text(abstract_text)
 
 make_header('Paper')
-body.append('div').style('line-height', 1.4).style('font-weight', 'bold').style('font-size', '0.9rem').text(title)
+body.append('div').style('line-height', 1.1).style('font-weight', 'bold').style('font-size', '1.1rem').text(title)
 	.append('div').style('font-weight', 'normal').text(authors.map(d => ' '+d.name))
-	.append('div').style('font-style', 'italic').text("Preprint")
-	.append('div').style('font-style', 'normal').append('a').attr('href', 'assets/paper.pdf').text('[PDF]')
+	.append('div').style('font-style', 'italic').text("ICLR 2023, Kigali, Rwanda, notable-top-5% (oral)")
+	.append('div').style('font-style', 'normal').append('a').attr('href', 'https://openreview.net/forum?id=_2bDpAtr7PI').text('[OpenReview]')
 	
+
+make_header('Video')
+body.append('div')
+	.text('coming soon...')
+	.attr('href', 'https://github.com/dmklee/image2sphere')
 
 make_header('Code')
 body.append('div')
@@ -100,21 +105,23 @@ body.append('div')
 	.attr('href', 'https://github.com/dmklee/image2sphere')
 	.text('here.')
 
-//make_header('Citation')
-//body.append('div')
-	//.append('p')
-	//.style('border-radius', '6px')
-	//.style('padding', '10px')
-	//.style('background-color', '#eee')
-	//.append('pre')
-	//.style('font-size', '0.8rem')
-	//.style('line-height', '1.6')
-	//.text(`@misc{imagetoico2022,
-  //title = {I2I: Image to Icosahedral Projection for $\mathrm{SO}(3)$ Object Reasoning from Single-View Images},
-  //author = {Klee, David and Biza, Ondrej and Platt, Robert and Walters, Robin},
-  //journal = {arXiv preprint arXiv:2207.08925},
-  //year = {2022},
-//}`)
+make_header('Citation')
+body.append('div')
+	.append('p')
+	.style('border-radius', '6px')
+	.style('padding', '10px')
+	.style('background-color', '#eee')
+	.append('pre')
+	.style('font-size', '0.8rem')
+	.style('line-height', '1.6')
+	.text(`@inproceedings{
+klee2023image2sphere,
+title={Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction},
+author={David M. Klee and Ondrej Biza and Robert Platt and Robin Walters},
+booktitle={International Conference on Learning Representations},
+year={2023},
+url={https://openreview.net/forum?id=_2bDpAtr7PI}
+}`)
 
 // common syntax
 body.selectAll('.flex-row')
