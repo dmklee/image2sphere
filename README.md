@@ -5,14 +5,29 @@
 ![I2S model](assets/figure1.png)
 
 # Table of Contents
-1. [Installation](#install)
-2. [Dataset Preparation](#data)
-3. [Train I2S](#experiments)
+1. [Colab Demos](#colab)
+    1. [Visualize Predictions](#visualize)
+    2. [Model Walkthrough](#walkthrough)
+2. [Installation](#install)
+3. [Dataset Preparation](#data)
+4. [Train I2S](#experiments)
     1. [ModelNet10-SO(3)](#modelnet)
     2. [SYMSOL](#symsol)
     2. [PASCAL3D+](#pascal)
-3. [Citation](#citation)
-3. [Acknowledgements](#acknowledgements)
+4. [Evaluate I2S](#evaluate)
+5. [Citation](#citation)
+6. [Acknowledgements](#acknowledgements)
+
+## Colab Demos <a name="colab"></a>
+### Visualize Predictions <a name="visualize"></a>
+...coming soon
+
+### Model Walkthrough <a name="walkthrough"></a>
+This Colab notebook goes step-by-step through the construction of I2S, and illustrates
+how you can modify different components for a custom application
+<a href="https://colab.research.google.com/github/dmklee/image2sphere/blob/main/model_walkthrough.ipynb">
+	<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="" height="25">
+</a>
 
 ## Installation <a name="install"></a>
 This code was tested with python 3.8.  You can install all necessary requirements with pip:
@@ -52,6 +67,9 @@ train on SYMSOL II objects (`--dataset_name=symsolII-50000` will train on sphX; 
 python -m src.train --dataset_name=pascal3d-warp-synth --encoder=resnet101_pretrained --seed=0
 ```
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
+
+## Evaluate I2S <a name="evaluate"></a>
+...coming soon
 
 ## Citation <a name="citation"></a>
 To cite this work, please use the following bibtex:
