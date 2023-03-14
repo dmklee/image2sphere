@@ -39,15 +39,17 @@ def generate_numpy_dataset(file_name):
 
     return data
 
-if not os.path.exists('ModelNet10-SO3'):
-    # downlaod and unpack it
-    subprocess.run(["wget", "http://isis-data.science.uva.nl/shuai/datasets/ModelNet10-SO3.tar.gz"])
-    subprocess.run(["tar", "xzvf", "ModelNet10-SO3.tar.gz"])
-    subprocess.run(["rm", "ModelNet10-SO3.tar.gz"])
+if __name__ == "__main__":
 
-if not os.path.exists('modelnet10'):
-    os.mkdir('modelnet10')
+    if not os.path.exists('ModelNet10-SO3'):
+        # downlaod and unpack it
+        subprocess.run(["wget", "http://isis-data.science.uva.nl/shuai/datasets/ModelNet10-SO3.tar.gz"])
+        subprocess.run(["tar", "xzvf", "ModelNet10-SO3.tar.gz"])
+        subprocess.run(["rm", "ModelNet10-SO3.tar.gz"])
 
-np.savez_compressed('modelnet10/modelnet10_train', **generate_numpy_dataset('train_100V'))
-np.savez_compressed('modelnet10/modelnet10_limited_train', **generate_numpy_dataset('train_20V'))
-np.savez_compressed('modelnet10/modelnet10_test', **generate_numpy_dataset('test_20V'))
+    if not os.path.exists('modelnet10'):
+        os.mkdir('modelnet10')
+
+    np.savez_compressed('modelnet10/modelnet10_train', **generate_numpy_dataset('train_100V'))
+    np.savez_compressed('modelnet10/modelnet10_limited_train', **generate_numpy_dataset('train_20V'))
+    np.savez_compressed('modelnet10/modelnet10_test', **generate_numpy_dataset('test_20V'))

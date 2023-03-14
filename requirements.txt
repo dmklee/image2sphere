@@ -3,7 +3,7 @@ scipy
 opencv-python
 tqdm
 lmdb
-pytorch
+torch
 torchvision
 e3nn
 matplotlib

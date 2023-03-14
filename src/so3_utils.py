@@ -7,7 +7,7 @@ import healpy as hp
 def compute_trace(rotA, rotB):
     '''
     rotA, rotB are tensors of shape (*,3,3)
-    returns Tr(rotA, rotB.T)
+    returns Tr(rotA @ rotB.T)
     '''
     prod = torch.matmul(rotA, rotB.transpose(-1, -2))
     trace = prod.diagonal(dim1=-1, dim2=-2).sum(-1)
@@ -16,7 +16,7 @@ def compute_trace(rotA, rotB):
 def rotation_error(rotA, rotB):
     '''
     rotA, rotB are tensors of shape (*,3,3)
-    returns error tensor of shape (*)
+    returns error in radians, tensor of shape (*)
     '''
     trace = compute_trace(rotA, rotB)
     return torch.arccos(torch.clamp( (trace - 1)/2, -1, 1))
