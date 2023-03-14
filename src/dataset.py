@@ -10,7 +10,7 @@ class ModelNet10Dataset(torch.utils.data.Dataset):
     def __init__(self,
                  dataset_path: str,
                  train: bool,
-                 limited: bool=False,
+                 limited: bool = False,
                 ):
         name = f"modelnet10_{'train' if train else 'test'}.npz"
         if limited and train:
@@ -19,7 +19,7 @@ class ModelNet10Dataset(torch.utils.data.Dataset):
         data = np.load(path)
 
         self.data = {
-            'img' : torch.from_numpy(data['imgs']).permute(0,3,1,2),
+            'img' : torch.from_numpy(data['imgs']).permute(0, 3, 1, 2),
             'rot' : torch.from_numpy(data['rots']),
             'cls' : torch.from_numpy(data['cat_ids']).unsqueeze(-1).long(),
         }
@@ -42,7 +42,7 @@ class ModelNet10Dataset(torch.utils.data.Dataset):
 
     @property
     def img_shape(self):
-        return (3,224,224)
+        return (3, 224, 224)
 
     def __len__(self):
         return len(self.data['img'])
@@ -83,7 +83,7 @@ class SymsolDataset(torch.utils.data.Dataset):
                                f'{self.class_names[cls_ind]}_{str(index).zfill(5)}.png')
         img = np.array(Image.open(im_path))
         img = torch.from_numpy(img).to(torch.float32) / 255.
-        img = img.permute(2,0,1)
+        img = img.permute(2, 0, 1)
 
         class_index = torch.tensor((cls_ind,), dtype=torch.long)
 
@@ -94,4 +94,4 @@ class SymsolDataset(torch.utils.data.Dataset):
 
     @property
     def img_shape(self):
-        return (3,224,224)
+        return (3, 224, 224)

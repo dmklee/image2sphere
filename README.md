@@ -1,7 +1,8 @@
 ## Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction
-[Paper](https://github.com/dmklee/image2sphere/blob/gh-pages/assets/paper.pdf) | [Project Page](https://dmklee.github.io/image2sphere/)
+[Paper](https://openreview.net/forum?id=_2bDpAtr7PI) | [Project Page](https://dmklee.github.io/image2sphere/)
 
 ---------------------------------------------------------------------
+![I2S model](assets/figure1.png)
 
 ## Installation
 This code was tested with python 3.8.  You can install all necessary requirements with pip:
@@ -41,5 +42,20 @@ python -m src.train --dataset_name=pascal3d-warp-synth --encoder=resnet101_pretr
 ```
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
 
+## Citation
+To cite this work, please use the following bibtex:
+```bibtex
+@inproceedings{
+	klee2023image2sphere,
+	title={Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction},
+	author={David M. Klee and Ondrej Biza and Robert Platt and Robin Walters},
+	booktitle={International Conference on Learning Representations},
+	year={2023},
+	url={https://openreview.net/forum?id=_2bDpAtr7PI}
+}
+```
+
 ## Acknowledgements
 The code for loading and warping PASCAL3D+ images is taken from [this repo](https://github.com/Davmo049/Public_prob_orientation_estimation_with_matrix_fisher_distributions).  The code for generating healpy grids and visualizing distributions over SO(3) is taken from [this repo](https://github.com/google-research/google-research/tree/master/implicit_pdf).
+
+
