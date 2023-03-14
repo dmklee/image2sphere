@@ -22,12 +22,14 @@
 ### Visualize Predictions <a name="visualize"></a>
 ...coming soon
 
-### Model Walkthrough <a name="walkthrough"></a>
-This Colab notebook goes step-by-step through the construction of I2S, and illustrates
-how you can modify different components for a custom application
+### Model Walkthrough <a name="walkthrough"></a> 
 <a href="https://colab.research.google.com/github/dmklee/image2sphere/blob/main/model_walkthrough.ipynb">
 	<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="" height="25">
 </a>
+
+This Colab notebook goes step-by-step through the construction of I2S, and illustrates
+how you can modify different components for a custom application.
+
 
 ## Installation <a name="install"></a>
 This code was tested with python 3.8.  You can install all necessary requirements with pip:
