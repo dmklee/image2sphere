@@ -2,6 +2,7 @@
 [Paper](https://openreview.net/forum?id=_2bDpAtr7PI) | [Project Page](https://dmklee.github.io/image2sphere/)
 
 ---------------------------------------------------------------------
+![I2S model](assets/figure1.png)
 This repository implements a hybrid equivariant model for SO(3) reasoning from 2D images for object pose estimation.
 The underlying SO(3) symmetry of the pose estimation task is not accessible in an image, which can only be rotated in
 plane.  Our model, I2S, projects features from the image plane onto the sphere, which is SO(3) transformable.  Thus,
@@ -9,8 +10,6 @@ the model is able to leverage SO(3)-equivariant group convolutions which improve
 the output of the group convolution are coefficients over the Fourier basis of SO(3), which form a concise yet expressive
 representation for distributions over SO(3).  Our model can capture complex pose distributions that arise from occlusions, 
 ambiguity or object symmetries.
-
-![I2S model](assets/figure1.png)
 
 # Table of Contents
 1. [Colab Demos](#colab)
@@ -58,7 +57,7 @@ python -m src.train --dataset_name=modelnet10 --encoder=resnet50_pretrained --se
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
 
 To train on the limited training set (20 views per instance), run:
-```
+```Wednesday 3:42 PM Call started
 python -m src.train --dataset_name=modelnet10-limited --encoder=resnet50_pretrained --seed=0
 ```
 
