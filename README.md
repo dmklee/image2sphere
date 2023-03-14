@@ -4,18 +4,29 @@
 ---------------------------------------------------------------------
 ![I2S model](assets/figure1.png)
 
-## Installation
+# Table of Contents
+1. [Installation](#install)
+2. [Dataset Preparation](#data)
+3. [Train I2S](#experiments)
+    1. [ModelNet10-SO(3)](#modelnet)
+    2. [SYMSOL](#symsol)
+    2. [PASCAL3D+](#pascal)
+3. [Citation](#citation)
+3. [Acknowledgements](#acknowledgements)
+
+## Installation <a name="install"></a>
 This code was tested with python 3.8.  You can install all necessary requirements with pip:
 ```
 pip install -r requirements.txt
 ```
 You may get lots of warnings from e3nn about deprecated functions. If so, run commands as `python -W ignore -m src.train ...`
 
-## Dataset preparation
+## Dataset preparation <a name="data"></a>
 Follow instruction in `datasets/README.md`.  Make sure to run commands from 
 within the `datasets` folder.
 
-## Train on ModelNet10-SO(3)
+## Train I2S <a name="experiments"></a>
+### ModelNet10-SO(3) <a name="modelnet"></a>
 ```
 python -m src.train --dataset_name=modelnet10 --encoder=resnet50_pretrained --seed=0
 ```
@@ -26,7 +37,7 @@ To train on the limited training set (20 views per instance), run:
 python -m src.train --dataset_name=modelnet10-limited --encoder=resnet50_pretrained --seed=0
 ```
 
-## Train on SYMSOL
+### SYMSOL <a name="symsol"></a>
 Here is an example for training on SYMSOL I with 50k views per instance
 ```
 python -m src.train --dataset_name=symsolI-50000 --encoder=resnet50_pretrained --seed=0
@@ -36,13 +47,13 @@ Average log likelihood on the test set will be stored in `results/symsolI-50000_
 You can adjust the number of views (`--dataset_name=symsolI-10000` will use 10k views per instance) or
 train on SYMSOL II objects (`--dataset_name=symsolII-50000` will train on sphX; `--dataset_name=symsolIII-50000` will train on cylO; `--dataset_name=symsolIIII-50000` will train on tetX).  We train a single model on all of SYMSOL I, but separate models for each object from SYMSOL II.
 
-## Train on PASCAL3D+
+### Train on PASCAL3D+ <a name="pascal"></a>
 ```
 python -m src.train --dataset_name=pascal3d-warp-synth --encoder=resnet101_pretrained --seed=0
 ```
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
 
-## Citation
+## Citation <a name="citation"></a>
 To cite this work, please use the following bibtex:
 ```bibtex
 @inproceedings{
@@ -55,7 +66,7 @@ To cite this work, please use the following bibtex:
 }
 ```
 
-## Acknowledgements
+## Acknowledgements <a name="acknowledgements"></a>
 The code for loading and warping PASCAL3D+ images is taken from [this repo](https://github.com/Davmo049/Public_prob_orientation_estimation_with_matrix_fisher_distributions).  The code for generating healpy grids and visualizing distributions over SO(3) is taken from [this repo](https://github.com/google-research/google-research/tree/master/implicit_pdf).
 
 
