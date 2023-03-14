@@ -1,4 +1,4 @@
-## Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction
+## Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction (ICLR'23)
 [Paper](https://openreview.net/forum?id=_2bDpAtr7PI) | [Project Page](https://dmklee.github.io/image2sphere/)
 
 ---------------------------------------------------------------------
