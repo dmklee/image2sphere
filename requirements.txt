@@ -7,3 +7,4 @@ torch
 torchvision
 e3nn
 matplotlib
+healpy
