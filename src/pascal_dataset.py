@@ -438,3 +438,23 @@ class Pascal3D(Dataset):
             return 4 * len(self.real_dataset)
         else:
             return len(self.real_dataset)
+
+if __name__ == "__main__":
+    dataset = Pascal3DReal(train=False, use_warp=False)
+    a = np.arange(len(dataset))
+    np.random.shuffle(a)
+    a = a[:10]
+
+    imgs = []
+    rots = []
+    clss = []
+    for i in a:
+        b = dataset[i]
+        imgs.append((b['img'].permute(1, 2, 0) * 255).numpy().astype(np.uint8))
+        rots.append(b['rot'].numpy())
+        clss.append(b['cls'].numpy())
+
+    imgs = np.array(imgs)
+    rots = np.array(rots)
+    clss = np.array(clss)
+    np.savez('mini_pascal.npz', imgs=imgs, rots=rots, clss=clss)

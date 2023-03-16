@@ -98,22 +98,23 @@ def plot_so3_distribution(probs: torch.Tensor,
     return img
 
 
-def plot_predictions(images, probs, rots, gt_rots, num=4, path=None):
-    images = images.cpu()
-    probs = probs.detach().cpu()
-    rots = rots.cpu()
-    gt_rots = gt_rots.cpu()
-
+def plot_predictions(images, probs, rots, gt_rots=None, num=None, path=None):
     fig = plt.figure(figsize=(4.8, np.ceil(num/2)), dpi=300)
     gs = GridSpec(int(np.ceil(num/2)), 4, width_ratios=[1,3,1,3], wspace=0, left=0, top=1, bottom=0, right=1)
 
+    num = num or len(images)
     for i in range(num):
         ax0 = fig.add_subplot(gs[2*i])
         plot_image(fig, ax0, images[i])
 
         ax1 = fig.add_subplot(gs[2*i+1])
-        img = plot_so3_distribution(probs[i], rots, gt_rotation=gt_rots[i],
-                                    show_color_wheel=i==0)
+
+        img = plot_so3_distribution(
+            probs[i],
+            rots,
+            gt_rotation=gt_rots[i] if gt_rots is not None else None,
+            show_color_wheel=i==0,
+        )
         ax1.imshow(img)
         ax1.axis('off')
 

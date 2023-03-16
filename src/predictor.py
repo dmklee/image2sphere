@@ -7,8 +7,15 @@ import torch.nn as nn
 import e3nn
 from e3nn import o3
 
-from src.so3_utils import *
-from src.models import *
+from src import so3_utils
+from src.models import (
+    SpatialS2Projector,
+    HarmonicS2Projector,
+    SpatialS2Features,
+    HarmonicS2Features,
+    ResNet,
+    SO3Convolution,
+)
 
 class BaseSO3Predictor(nn.Module):
     def __init__(self,
@@ -65,12 +72,12 @@ class I2S(BaseSO3Predictor):
         }[feature_sphere_mode](sphere_fdim, lmax, f_out=f_hidden)
 
         self.lmax = lmax
-        irreps_in = s2_irreps(lmax)
-        self.o3_conv = o3.Linear(irreps_in, so3_irreps(lmax),
+        irreps_in = so3_utils.s2_irreps(lmax)
+        self.o3_conv = o3.Linear(irreps_in, so3_utils.so3_irreps(lmax),
                                  f_in=sphere_fdim, f_out=f_hidden, internal_weights=False)
 
         self.so3_activation = e3nn.nn.SO3Activation(lmax, lmax, torch.relu, 10)
-        so3_grid = so3_near_identity_grid()
+        so3_grid = so3_utils.so3_near_identity_grid()
         self.so3_conv = SO3Convolution(f_hidden, 1, lmax, so3_grid)
 
         # output rotations for training and evaluation
@@ -81,19 +88,19 @@ class I2S(BaseSO3Predictor):
         self.eval_grid_rec_level = eval_grid_rec_level
         self.eval_use_gradient_ascent = eval_use_gradient_ascent
 
-        output_xyx = so3_healpix_grid(rec_level=train_grid_rec_level)
+        output_xyx = so3_utils.so3_healpix_grid(rec_level=train_grid_rec_level)
         self.register_buffer(
-            "output_wigners", flat_wigner(lmax, *output_xyx).transpose(0,1)
+            "output_wigners", so3_utils.flat_wigner(lmax, *output_xyx).transpose(0,1)
         )
         self.register_buffer(
             "output_rotmats", o3.angles_to_matrix(*output_xyx)
         )
 
-        output_xyx = so3_healpix_grid(rec_level=eval_grid_rec_level)
+        output_xyx = so3_utils.so3_healpix_grid(rec_level=eval_grid_rec_level)
         try:
             self.eval_wigners = torch.load('eval_rec5.pt')
         except FileNotFoundError:
-            self.eval_wigners = flat_wigner(lmax, *output_xyx).transpose(0,1)
+            self.eval_wigners = so3_utils.flat_wigner(lmax, *output_xyx).transpose(0,1)
 
         self.eval_rotmats = o3.angles_to_matrix(*output_xyx)
 
@@ -126,7 +133,7 @@ class I2S(BaseSO3Predictor):
                 # creating wigners is slightly faster on cpu
                 try:
                     abg = o3.matrix_to_angles(gt_rot.cpu())
-                    wigners[:,:gt_rot.size(0)] = flat_wigner(self.lmax, *abg).transpose(0,1).to(x.device)
+                    wigners[:,:gt_rot.size(0)] = so3_utils.flat_wigner(self.lmax, *abg).transpose(0,1).to(x.device)
                     rotmats[:gt_rot.size(0)] = gt_rot
                 except AssertionError:
                     # sometimes dataloader generates invalid rot matrix according to o3
@@ -152,7 +159,7 @@ class I2S(BaseSO3Predictor):
             b.requires_grad = True
             g.requires_grad = True
             for _ in range(n_iters):
-                wigners = flat_wigner(self.lmax, a,b,g).transpose(0,1)
+                wigners = so3_utils.flat_wigner(self.lmax, a,b,g).transpose(0,1)
                 val = torch.diagonal(torch.matmul(fourier, wigners).squeeze(1))
                 da, db, dg = torch.autograd.grad(val.mean(), (a, b, g))
                 a = a + lr * da
@@ -178,12 +185,12 @@ class I2S(BaseSO3Predictor):
         x = self.forward(img, cls)
         grid_signal, rotmats = self.query_train_grid(x, rot)
 
-        rot_id = nearest_rotmat(rot, rotmats)
+        rot_id = so3_utils.nearest_rotmat(rot, rotmats)
         loss = nn.CrossEntropyLoss()(grid_signal, rot_id)
 
         with torch.no_grad():
             pred_id = grid_signal.max(dim=1)[1]
             pred_rotmat = rotmats[pred_id]
-            acc = rotation_error(rot, pred_rotmat)
+            acc = so3_utils.rotation_error(rot, pred_rotmat)
 
         return loss, acc.cpu().numpy()

@@ -17,21 +17,19 @@ class ResNet(nn.Module):
                  **kwargs,
                  ):
         super().__init__()
-        full_model = {18 : resnet.resnet18,
-                      34 : resnet.resnet34,
-                      50 : resnet.resnet50,
-                      101 : resnet.resnet101,
-                     }[size](pretrained)
-        resnet_cout = 512 if size in (18, 34) else 2048
+        weights = 'DEFAULT' if pretrained else None
+        full_model = eval(f'resnet.resnet{size}')(weights=weights)
+
+        out_fdim = 512 if size in (18, 34) else 2048
 
         # remove pool and linear
         modules = list(full_model.children())[:-2]
 
         if pool_features:
             modules.append(nn.AdaptiveAvgPool2d(1))
-            self.output_shape = (resnet_cout, 1, 1)
+            self.output_shape = (out_fdim, 1, 1)
         else:
-            self.output_shape = (resnet_cout, 7, 7)
+            self.output_shape = (out_fdim, 7, 7)
 
         self.layers = nn.Sequential(*modules)
 

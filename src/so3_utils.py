@@ -13,6 +13,7 @@ def compute_trace(rotA, rotB):
     trace = prod.diagonal(dim1=-1, dim2=-2).sum(-1)
     return trace
 
+
 def rotation_error(rotA, rotB):
     '''
     rotA, rotB are tensors of shape (*,3,3)
