@@ -356,7 +356,7 @@ class Pascal3DSynth(Dataset):
         class_idx = self.class_ids.index(fname.split('/')[-3])
 
         img_full = Image.open(fname)
-        img_full = np.array(img_full.getdata()).reshape(img_full.size[1], img_full.size[0],3).astype(np.float) / 255
+        img_full = np.array(img_full.getdata()).reshape(img_full.size[1], img_full.size[0],3).astype(np.float32) / 255
 
         base_name = os.path.split(fname)[1]
         a, e, t = [int(x[1:]) for x in base_name.split('_')[-4:-1]]
