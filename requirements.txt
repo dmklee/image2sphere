@@ -8,3 +8,4 @@ torchvision
 e3nn
 matplotlib
 healpy
+scikit-image
