@@ -15,6 +15,7 @@ ambiguity or object symmetries.
 1. [Colab Demos](#colab)
     1. [Visualize Predictions](#visualize)
     2. [Model Walkthrough](#walkthrough)
+    3. [Intro to Spherical Convolution](#tutorial)
 2. [Installation](#install)
 3. [Dataset Preparation](#data)
 4. [Train I2S](#experiments)
@@ -37,6 +38,12 @@ ambiguity or object symmetries.
 This Colab notebook goes step-by-step through the construction of I2S, and illustrates
 how you can modify different components for a custom application.
 
+### Intro to Spherical Convolution <a name="tutorial"></a> 
+<a href="https://colab.research.google.com/gist/dmklee/a05c24e0b3f5a36dc9ab6765ce2f97aa/introtosphericalharmonics.ipynb">
+	<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="" height="25">
+</a>
+
+This Colab notebook helps you understand spherical harmonics and spherical convolution with some visualizations.
 
 ## Installation <a name="install"></a>
 This code was tested with python 3.8.  You can install all necessary requirements with pip:
