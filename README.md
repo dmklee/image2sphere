@@ -21,7 +21,7 @@ ambiguity or object symmetries.
     1. [ModelNet10-SO(3)](#modelnet)
     2. [SYMSOL](#symsol)
     2. [PASCAL3D+](#pascal)
-4. [Evaluate I2S](#evaluate)
+4. [Pretrained Models](#pretrained)
 5. [Citation](#citation)
 6. [Acknowledgements](#acknowledgements)
 
@@ -77,8 +77,39 @@ python -m src.train --dataset_name=pascal3d-warp-synth --encoder=resnet101_pretr
 ```
 Rotation error (in radians) on the test set will be stored in `results/pascal3d-warp-synth_resnet101-pretrained_seed0/eval.npy`
 
-## Evaluate I2S <a name="evaluate"></a>
-...coming soon
+## Pretrained Models <a name="pretrained"></a>
+### Pascal3D+
+Download the checkpoint [here](https://drive.google.com/file/d/1dWlvGp1QY3esAqZgOnPikR6TpJmBUngd/view?usp=sharing).  It achieves median rotation error of 9.6 degrees averaged over all twelve classes.  It was trained using the procedure outlined in the paper. 
+
+<details>
+<summary> Use the following code to load the weights: </summary>
+	
+```python
+from src.predictor import I2S
+
+model = I2S(num_classes=12, encoder='resnet101')
+checkpoint = torch.load('pascal3d_checkpoint.pt')
+model.load_state_dict(checkpoint)
+model.eval()
+```
+
+</details>
+	
+### ModelNet10-SO(3) 
+Download the checkpoint [here](). It achieves median rotation error of 9.6 degrees averaged over all 10 classes.  It was trained using the procedure outlined in the paper (100 training views).  
+
+<details>
+<summary> Use the following code to load the weights: </summary>
+	
+```python
+from src.predictor import I2S
+
+model = I2S(num_classes=10, encoder='resnet50')
+checkpoint = torch.load('modelnet10so3_checkpoint.pt')
+model.load_state_dict(checkpoint)
+model.eval()
+```
+</details>
 
 ## Citation <a name="citation"></a>
 To cite this work, please use the following bibtex:
