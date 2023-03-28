@@ -103,7 +103,7 @@ model.eval()
 </details>
 	
 ### ModelNet10-SO(3) 
-Download the checkpoint [here](). It achieves median rotation error of 9.6 degrees averaged over all 10 classes.  It was trained using the procedure outlined in the paper (100 training views).  
+Download the checkpoint [here](https://drive.google.com/file/d/1wihL8AGfyrfDjp1mRjqkpvunMGfztSUa/view?usp=sharing). It achieves an Acc@15 of 0.721, averaged over all 10 classes.  It was trained using the procedure outlined in the paper (100 training views).  
 
 <details>
 <summary> Use the following code to load the weights: </summary>
