@@ -28,7 +28,12 @@ ambiguity or object symmetries.
 
 ## Colab Demos <a name="colab"></a>
 ### Visualize Predictions <a name="visualize"></a>
-...coming soon
+<a href="https://colab.research.google.com/github/dmklee/image2sphere/blob/main/visualize_trained_predictions.ipynb">
+	<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="" height="25">
+</a>
+
+This Colab notebook loads pretrained I2S models on PASCAL3D+ and ModelNet10-SO(3) and visualizes output distributions
+generated for images from the test set.  You can also upload your own images and see what the model predicts.
 
 ### Model Walkthrough <a name="walkthrough"></a> 
 <a href="https://colab.research.google.com/github/dmklee/image2sphere/blob/main/model_walkthrough.ipynb">
@@ -95,7 +100,7 @@ Download the checkpoint [here](https://drive.google.com/file/d/1dWlvGp1QY3esAqZg
 from src.predictor import I2S
 
 model = I2S(num_classes=12, encoder='resnet101')
-checkpoint = torch.load('pascal3d_checkpoint.pt')
+checkpoint = torch.load('pascal3d_checkpoint.pt')['model_state_dict']
 model.load_state_dict(checkpoint)
 model.eval()
 ```
@@ -112,7 +117,7 @@ Download the checkpoint [here](https://drive.google.com/file/d/1wihL8AGfyrfDjp1m
 from src.predictor import I2S
 
 model = I2S(num_classes=10, encoder='resnet50')
-checkpoint = torch.load('modelnet10so3_checkpoint.pt')
+checkpoint = torch.load('modelnet10so3_checkpoint.pt')['model_state_dict']
 model.load_state_dict(checkpoint)
 model.eval()
 ```
