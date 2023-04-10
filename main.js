@@ -39,14 +39,14 @@ var body = d3.select('body')
 
 // title
 body.append('p')
-	.style('font-size', '1.8rem')
+	.style('font-size', '2.4rem')
 	.style('font-weight', 500)
 	.style('text-align', 'center')
 	.style('margin', '20px auto')
 	.text(title)
 
 // authors
-var authors_div = body.append('div').attr('class', 'flex-row')
+var authors_div = body.append('div').attr('class', 'flex-row').style('font-size', '0.8rem')
 for (let i=0; i < authors.length; i++) {
 	authors_div.append('a')
 				.attr('href', authors[i]['link'])
@@ -61,7 +61,7 @@ for (let i=0; i < associations.length; i++) {
 					.attr('href', associations[i]['link'])
 					.append('img')
 					.attr('src', associations[i]['logo'])
-					.style('height', '70px')
+					.style('height', '50px')
 }
 
 
@@ -87,16 +87,22 @@ body.append('div')
 	.text(abstract_text)
 
 make_header('Paper')
-body.append('div').style('line-height', 1.1).style('font-weight', 'bold').style('font-size', '1.1rem').text(title)
+body.append('div').style('line-height', 1.25).style('font-weight', 'bold').style('font-size', '1.0rem').text(title)
 	.append('div').style('font-weight', 'normal').text(authors.map(d => ' '+d.name))
-	.append('div').style('font-style', 'italic').text("ICLR 2023, Kigali, Rwanda, notable-top-5% (oral)")
+	.append('div').style('font-style', 'italic').text("ICLR 2023, Kigali, Rwanda, notable-top-5%")
 	.append('div').style('font-style', 'normal').append('a').attr('href', 'https://openreview.net/forum?id=_2bDpAtr7PI').text('[OpenReview]')
+	.append('span').append('a').attr('href', 'https://arxiv.org/pdf/2302.13926').text('[arXiv]')
 	
 
 make_header('Video')
 body.append('div')
-	.text('coming soon...')
-	.attr('href', 'https://github.com/dmklee/image2sphere')
+	.append('iframe')
+	.attr('title', 'I2S Presentation')
+	.attr('width', '800')
+	.attr('height', '450')
+	.attr('type', "text/html")
+	.attr('frameborder', '0')
+	.attr('src', 'https://www.youtube.com/embed/yZz3umtyEEk')
 
 make_header('Code')
 body.append('div')
@@ -115,12 +121,12 @@ body.append('div')
 	.style('font-size', '0.8rem')
 	.style('line-height', '1.6')
 	.text(`@inproceedings{
-klee2023image2sphere,
-title={Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction},
-author={David M. Klee and Ondrej Biza and Robert Platt and Robin Walters},
-booktitle={International Conference on Learning Representations},
-year={2023},
-url={https://openreview.net/forum?id=_2bDpAtr7PI}
+  klee2023image2sphere,
+  title={Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction},
+  author={David M. Klee and Ondrej Biza and Robert Platt and Robin Walters},
+  booktitle={International Conference on Learning Representations},
+  year={2023},
+  url={https://arxiv.org/pdf/2302.13926}
 }`)
 
 // common syntax
