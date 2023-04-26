@@ -31,13 +31,15 @@ const abstract_text = 'Predicting the pose of objects from a single image is an 
 function make_header(name) {
 	body.append('div')
 		.style('margin', '30px 0 10px 0')
-		.style('padding-left', '8px')
+		.style('padding-left', '4px')
 		.style('padding-bottom', '4px')
-		.style('border-bottom', '1px #555 solid')
+		.style('border-bottom', '2px #999999 solid')
 		.style('width', '100%')
 		.append('p')
-		.style('font-size', '1.5rem')
-		.style('font-style', 'italic')
+		.style('font-size', '1.3rem')
+		.style('font-weight', 'bold')
+		//.style('font-style', 'italic')
+		.style('color', '#5e5e5e')
 		.style('margin', '2px 4px')
 		.text(name)
 	
@@ -47,47 +49,47 @@ const max_width = '800px';
 
 var body = d3.select('body')
 			 .style('max-width', max_width)
-			 .style('margin', '60px auto')
-			 .style('margin-top', '100px')
-			 .style("font-family", "Garamond")
-			 .style("font-size", "1.2rem")
+			 .style('margin', '30px auto')
+			 .style('margin-top', '80px')
+			 .style("font-family", "Georgia")
+			 .style("font-size", "1.1rem")
 
 // title
 body.append('p')
-	.style('font-size', '2.4rem')
-	.style('font-weight', 500)
+	.style('font-size', '2.2rem')
+	.style('font-weight', 300)
 	.style('text-align', 'center')
 	.style('margin', '20px auto')
 	.text(title)
 
 // authors
-var authors_div = body.append('div').attr('class', 'flex-row').style('font-size', '0.8rem')
-for (let i=0; i < authors.length; i++) {
-	authors_div.append('a')
-				.attr('href', authors[i]['link'])
-				.text(authors[i]['name'])
-				.style('margin', '10px')
-}
+//var authors_div = body.append('div').attr('class', 'flex-row').style('font-size', '0.8rem')
+//for (let i=0; i < authors.length; i++) {
+	//authors_div.append('a')
+				//.attr('href', authors[i]['link'])
+				//.text(authors[i]['name'])
+				//.style('margin', '10px')
+//}
 
 // associations
-var associations_div = body.append('div').attr('class', 'flex-row')
-for (let i=0; i < associations.length; i++) {
-	associations_div.append('a')
-					.attr('href', associations[i]['link'])
-					.append('img')
-					.attr('src', associations[i]['logo'])
-					.style('height', '50px')
-}
+//var associations_div = body.append('div').attr('class', 'flex-row')
+//for (let i=0; i < associations.length; i++) {
+	//associations_div.append('a')
+					//.attr('href', associations[i]['link'])
+					//.append('img')
+					//.attr('src', associations[i]['logo'])
+					//.style('height', '50px')
+//}
 
 
 // main figure
-//var fig_div = body.append('div')
-	//.attr('class', 'flex-row')
-//fig_div
-	//.append('img')
-	//.style('margin', 'auto 0')
-	//.attr('src', 'assets/figure1.png')
-	//.attr('width', '600px')
+var fig_div = body.append('div')
+	.attr('class', 'flex-row')
+fig_div
+	.append('img')
+	.style('margin', 'auto 0')
+	.attr('src', 'assets/figure1.png')
+	.attr('width', '800px')
 
 
 // abstract
@@ -101,12 +103,61 @@ body.append('div')
 	.append('span').style('font-weight', 'normal')
 	.text(abstract_text)
 
+make_header('Idea')
+idea_div = body.append('div')//.style('display', 'flex')
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/rotating_mug.gif')
+		.attr('width', '400px')
+
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/conv_text.gif')
+		.attr('width', '400px')
+
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/proj-diagram.png')
+		.attr('width', '400px')
+
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/trunc_fourier.png')
+		.attr('width', '400px')
+
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/pascal_pred.png')
+		.attr('width', '800px')
+
+idea_div.append('img')
+		.style('margin', 'auto 0')
+		.attr('src', 'assets/symsol_pred.png')
+		.attr('width', '800px')
+
+
 make_header('Paper')
-body.append('div').style('line-height', 1.25).style('font-weight', 'bold').style('font-size', '1.0rem').text(title)
-	.append('div').style('font-weight', 'normal').text(authors.map(d => ' '+d.name))
-	.append('div').style('font-style', 'italic').text("ICLR 2023, Kigali, Rwanda, notable-top-5%")
-	.append('div').style('font-style', 'normal').append('a').attr('href', 'https://openreview.net/forum?id=_2bDpAtr7PI').text('[OpenReview]')
-	.append('span').append('a').attr('href', 'https://arxiv.org/pdf/2302.13926').text('[arXiv]')
+paper_div = body.append('div').style('line-height', 1.25).style('font-size', '1.0rem')
+paper_div.append('div').text(
+	'Published at the Eleventh International Conference on Learning Representations (ICLR 2023)'
+)
+paper_div.append('div').style('font-weight', 'bold').text("Notable-Top-5%")
+paper_div.append('div').style('font-style', 'normal').append('a').attr('href', 'https://openreview.net/forum?id=_2bDpAtr7PI').style('text-decoration', 'none').text('[OpenReview]')
+		 .append('span').append('a').attr('href', 'https://arxiv.org/pdf/2302.13926').style('text-decoration', 'none').text('[arXiv]')
+authors_div = paper_div.append('div').style('font-weight', 'normal')
+
+for (let i=0; i < authors.length; i++) {
+	authors_div.append('a')
+				.attr('href', authors[i]['link']).style('text-decoration', 'none')
+				.text(authors[i]['name'])
+				.style('padding-right', '8px')
+}
+authors_div = paper_div.append('div').style('font-weight', 'normal').text(
+	'Khoury College of Computer Sciences'
+)
+authors_div = paper_div.append('div').style('font-weight', 'normal').text(
+	'Northeastern University'
+)
 	
 
 make_header('Video')
@@ -176,6 +227,12 @@ body.append('div')
   year={2023},
   url={https://arxiv.org/pdf/2302.13926}
 }`)
+
+make_header('Contact')
+code_body = body.append('div').style('font-size', '0.8rem')
+code_body.append('span')
+	.text('For questions, please contact David Klee at: klee [dot] d [at] northeastern [dot] edu')
+
 
 // common syntax
 body.selectAll('.flex-row')
