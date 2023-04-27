@@ -114,7 +114,7 @@ body.append('div')
 make_header('Idea')
 idea_div = body.append('div').style('font-size', '1.0rem').style('text-align', 'justify')
 idea_div.append('p').text(
-`This work studies the pose prediction problem: given a single image of an object, predicts the 3D rotation of the object
+`This work studies the pose prediction problem: given a single image of an object, predict the 3D rotation of the object
 relative to a canonical orientation. The pose prediction problem exhibits 3D rotation symmetry: when the object is rotated, 
 its pose rotates by the same amount (shown below). 
 `
