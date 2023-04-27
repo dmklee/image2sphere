@@ -1,9 +1,9 @@
 const title = 'Image to Sphere: Learning Equivariant Features for Efficient Pose Prediction'
 const authors = [
-	{'name' : 'David M. Klee', link : 'https://dmklee.github.io'},
-   	{'name' : 'Ondrej Biza', link : 'https://sites.google.com/view/obiza'},
-	{'name' : 'Robert Platt', link : 'https://www.khoury.northeastern.edu/people/robert-platt/'},
-   	{'name' : 'Robin Walters', link : 'https://www.khoury.northeastern.edu/people/robin-walters/'},
+	{'name' : 'David M. Klee', link : 'https://dmklee.github.io', profile: 'https://dmklee.github.io/assets/images/profile.jpg'},
+   	{'name' : 'Ondrej Biza', link : 'https://sites.google.com/view/obiza', profile: 'https://www2.ccs.neu.edu/research/helpinghands/author/ondrej-biza/avatar_hu254aef77619c527a447e931c40730b0b_11873_270x270_fill_q100_lanczos_center.jpg'},
+	{'name' : 'Robert Platt', link : 'https://www.khoury.northeastern.edu/people/robert-platt/', profile: 'https://www2.ccs.neu.edu/research/helpinghands/author/robert-platt/avatar_hu2f90b12bbbd594d46b2f07527bff6f72_38994_270x270_fill_q100_lanczos_center.jpg'},
+   	{'name' : 'Robin Walters', link : 'https://www.khoury.northeastern.edu/people/robin-walters/', profile: 'https://pointw.github.io/extrinsic_page/img/robin.jpeg'},
 ]
 const associations = [
 	{'name' : 'Khoury College at Northeastern University',
@@ -62,14 +62,6 @@ body.append('p')
 	.style('margin', '20px auto')
 	.text(title)
 
-// authors
-//var authors_div = body.append('div').attr('class', 'flex-row').style('font-size', '0.8rem')
-//for (let i=0; i < authors.length; i++) {
-	//authors_div.append('a')
-				//.attr('href', authors[i]['link'])
-				//.text(authors[i]['name'])
-				//.style('margin', '10px')
-//}
 
 // associations
 //var associations_div = body.append('div').attr('class', 'flex-row')
@@ -104,36 +96,81 @@ body.append('div')
 	.text(abstract_text)
 
 make_header('Idea')
-idea_div = body.append('div')//.style('display', 'flex')
-idea_div.append('img')
-		.style('margin', 'auto 0')
+idea_div = body.append('div').style('font-size', '1.0rem').style('text-align', 'justify')
+idea_div.append('p').text(
+`This work studies the pose prediction problem: given a single image of an object, predicts the 3D rotation of the object
+relative to a canonical orientation. The pose prediction problem exhibits 3D rotation symmetry: when the object is rotated, 
+its pose rotates by the same amount (shown below). 
+`
+)
+idea_div.append('img').style('display', 'block')
+		.style('margin', '0 auto')
 		.attr('src', 'assets/rotating_mug.gif')
 		.attr('width', '400px')
 
-idea_div.append('img')
-		.style('margin', 'auto 0')
+idea_div.append('p').text(`
+Ideally, we want a pose prediction network that learns an equivariant mapping (e.g. a rotated
+copy of the input produces a rotated copy of the output).  We can construct equivariant neural
+networks using trainable group convolution operations.  2D convolution is a well known instance of group
+convolution that is equivariant to shifts in the 2D plane.  For the pose prediction problem,
+we are interested in SO(3) group convolutions (spherical convolution), which is pictured on the right.
+`)
+
+idea_div.append('img').style('display', 'block')
+		.style('margin', '0 auto')
+		.style('margin-top', '-20px')
 		.attr('src', 'assets/conv_text.gif')
 		.attr('width', '400px')
 
-idea_div.append('img')
-		.style('margin', 'auto 0')
+idea_div.append('p').text(`
+Unfortunately, group convolution can only be applied to inputs that are transformable by the group, so it is not
+possible to apply SO(3)-equivariant layers directly on the image input.  Instead, we propose a hybrid-equivariant
+network, where non-equivariant layers are used to learn features that can be further processed with equivariant layers.
+More concretely, we use a standard convolutional network to extract a feature map, then map features onto the 2-sphere
+using an orthographic projection (shown below).  Once the features live on the 2-sphere (an SO(3) transformable space),
+we perform SO(3) group convolutions to improve the networks generalization capabilities.
+`)
+
+idea_div.append('img').style('display', 'block')
+		.style('margin', '0 auto')
 		.attr('src', 'assets/proj-diagram.png')
 		.attr('width', '400px')
 
-idea_div.append('img')
-		.style('margin', 'auto 0')
-		.attr('src', 'assets/trunc_fourier.png')
-		.attr('width', '400px')
+idea_div.append('p').text(`
+The SO(3) group convolution operations are performed efficiently in the Fourier domain.  Signals over the 2-sphere or
+SO(3) can be mapped to the Fourier domain using the Fast Fourier Transform, where they are represented by coefficients of
+spherical harmonics (visualized below) or Wigner-D matrices, respectively. 
+`)
 
-idea_div.append('img')
-		.style('margin', 'auto 0')
-		.attr('src', 'assets/pascal_pred.png')
-		.attr('width', '800px')
+idea_div.append('img').style('display', 'block')
+		.style('margin', '0 auto')
+		.attr('src', 'assets/trunc_fourier.png')
+		.style('transform', 'rotate(-90deg)')
+		.attr('width', '300px')
+
+idea_div.append('p').text(`
+We propose a novel approach to modeling distributions over SO(3) compactly by parametrizing in the Fourier domain.  Our approach
+is simple, yet highly expressive.  Here we show examples of distributions our method generates for the SYMSOL dataset; it can accurately
+model complex distributions resulting from objects with discrete or continuous symmetries.
+`)
 
 idea_div.append('img')
 		.style('margin', 'auto 0')
 		.attr('src', 'assets/symsol_pred.png')
 		.attr('width', '800px')
+
+idea_div.append('p').text(`
+We also show state-of-the-art performance on the challening PASCAL3D+ dataset, which includes real images of objects from 12 classes. Example
+predictions are shown below, which demonstrate how our model can naturally capture uncertainty.  The SO(3) equivariant layers of our method
+improve sample efficiency, which is especially important for this dataset since it is difficult to capture all possible rotations of objects in the
+dataset.
+`)
+
+idea_div.append('img').style('display', 'block')
+		.style('margin', '0 auto')
+		.attr('src', 'assets/pascal_pred.png')
+		.attr('width', '800px')
+
 
 
 make_header('Paper')
@@ -144,18 +181,26 @@ paper_div.append('div').text(
 paper_div.append('div').style('font-weight', 'bold').text("Notable-Top-5%")
 paper_div.append('div').style('font-style', 'normal').append('a').attr('href', 'https://openreview.net/forum?id=_2bDpAtr7PI').style('text-decoration', 'none').text('[OpenReview]')
 		 .append('span').append('a').attr('href', 'https://arxiv.org/pdf/2302.13926').style('text-decoration', 'none').text('[arXiv]')
-authors_div = paper_div.append('div').style('font-weight', 'normal')
+authors_div = paper_div.append('div').style('font-weight', 'normal').style('padding', '20px 0 12px 0').style('display', 'flex').style('justify-content', 'flex-start')
 
 for (let i=0; i < authors.length; i++) {
-	authors_div.append('a')
-				.attr('href', authors[i]['link']).style('text-decoration', 'none')
-				.text(authors[i]['name'])
-				.style('padding-right', '8px')
+	let author = authors_div.append('div').style('display', 'grid').style('padding-right', '10px')
+	author.append('img')
+		  .attr('src', authors[i]['profile'])
+		  .attr('width', '80px')
+		  .style('border-radius', '50%')
+		  .style('margin', '0 auto')
+		  .style('padding', '2px')
+		  
+	author.append('a')
+		  .attr('href', authors[i]['link']).style('text-decoration', 'none')
+		  .text(authors[i]['name'])
+		  .style('padding-right', '8px')
 }
-authors_div = paper_div.append('div').style('font-weight', 'normal').text(
+paper_div.append('div').style('font-weight', 'normal').text(
 	'Khoury College of Computer Sciences'
 )
-authors_div = paper_div.append('div').style('font-weight', 'normal').text(
+paper_div.append('div').style('font-weight', 'normal').text(
 	'Northeastern University'
 )
 	
