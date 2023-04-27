@@ -62,6 +62,22 @@ body.append('p')
 	.style('margin', '20px auto')
 	.text(title)
 
+// quick links
+quick_links = body.append('div')
+				  .style('display', 'flex')
+				  .style('justify-content', 'center')
+				  .style('margin', '0 auto')
+				  .style('font-size', '0.8rem')
+				  .style('font-style', 'italic')
+				  .style('margin-top', '-10px')
+				  
+quick_links.append('a').text('code').style('padding', '0 10px').style('text-decoration', 'none')
+		   .attr('href', 'https://github.com/dmklee/image2sphere')
+quick_links.append('a').text('paper').style('padding', '0 10px').style('text-decoration', 'none')
+		   .attr('href', 'https://arxiv.org/pdf/2302.13926')
+quick_links.append('a').text('bibtex').style('padding', '0 10px').style('text-decoration', 'none')
+		   .attr('href', './bibtex.txt')
+
 
 // associations
 //var associations_div = body.append('div').attr('class', 'flex-row')
