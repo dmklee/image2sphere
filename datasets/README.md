@@ -20,5 +20,5 @@ https://shapenet.cs.stanford.edu/media/syn_images_cropped_bkg_overlaid.tar
 ## SYMSOL
 Download dataset with this command:
 ```
-wget https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image/symmetric_solids/symmetric_solids.py
+wget 'https://storage.googleapis.com/gresearch/implicit-pdf/symsol_dataset.zip'
 ```
